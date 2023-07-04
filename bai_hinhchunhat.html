@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <style>
+        #paper{
+            background-color: antiquewhite;
+        }
+
+    </style>
+<body>
+    <canvas id="paper" width="500" height="400"></canvas>
+    <div>
+        <input type="text" id="width-rect" placeholder="chieu dai">
+        <input type="text" id="height-rect" placeholder="chieu rong">
+        <input type="color" id="color-rect">
+         <button onclick="drawRect()">Draw</button>
+    </div>
+    <div>
+        <button onclick="clearScreen()">Delete</button>
+    </div>
+    <div>
+        <input type="text" id="radius"  placeholder="nhap ban kinh" >
+        <button onclick="drawCircle">Circle</button>
+    </div>
+   
+    
+
+    <script>
+        let paper = document.getElementById("paper");//canvat
+        let pen = paper.getContext("2d");
+        function drawRect(x, y){
+            
+            let w = +document.getElementById("width-rect").value;
+            let h = +document.getElementById("height-rect").value;
+            let color = document.getElementById("color-rect").value;
+            pen.beginPath(); //bat dau ve , x ,y ,width, height
+            pen.rect(x, y, 100, 100, w, h); //TOA DO
+            pen.strokeStyle = "blue";
+            pen.lineWidth = 5; //kich co ngoi but
+            pen.stroke(); //ve duong vien
+            pen.fillStyle = "green"//doi mau ben trong
+            //pen.fillStyle = color;
+            pen.fill();
+            pen.closePath();//nhac but len   
+        }
+        let x = 100; 
+        let y = 100;
+        let speed =10
+        setInterval(function(){
+            if(y > paper.height - 50 || y < 50){
+                speed = -speed;
+            }
+            y+=speed;
+            clearScreen();
+            drawRect(x,y);
+        }, 60)
+       
+        function clearScreen(){ //delete screen
+                pen.clearRect(0, 0, paper.width, paper.height);
+            }
+        
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
